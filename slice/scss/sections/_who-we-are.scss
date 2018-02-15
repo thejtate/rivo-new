@@ -1,0 +1,63 @@
+.section-who-we-are {
+  padding: 30px 0;
+  color: $color-2;
+  text-align: center;
+
+  @media (min-width: $bp-small) {
+    height: 869px;
+    padding: 0;
+    text-align: left;
+  }
+
+  .bg, .bg-mobile {
+    background-position: 50% 0%;
+  }
+
+  .bg {
+    display: none;
+
+    @media (min-width: $bp-small) {
+      display: block;
+    }
+  }
+
+  .inner-wrap {
+
+    @media (min-width: $bp-small) {
+      width: 390px;
+      right: 0;
+    }
+  }
+
+  h2 {
+    color: $color-1;
+
+    br {
+      display: none;
+
+      @media (min-width: $bp-small) {
+        display: block;
+      }
+    }
+  }
+
+//  h2 {
+//    color: $color-1;
+//    text-align: left;
+//    width: 207px;
+//    margin: 0 auto;
+//
+//    @media (min-width: $bp-small) {
+//      margin: 0;
+//      width: auto;
+//    }
+//
+//    &:first-letter {
+//      color: $color-2;
+//    }
+//  }
+
+  .text {
+    margin: 25px 0 37px;
+  }
+}

@@ -1,0 +1,60 @@
+.form-get-in-touch {
+  color: $color-2;
+
+  @media (min-width: $bp-small) {
+    color: $color;
+  }
+
+  .form-type-text, .form-type-radio {
+    width: 240px;
+  }
+
+  .form-type-textarea {
+    width: 100%;
+  }
+
+  .form-item-wrap {
+
+    .form-item {
+      display: inline-block;
+      vertical-align: bottom;
+      margin-right: 11px;
+
+      &:nth-child(even) {
+        margin-right: 0;
+      }
+    }
+  }
+
+  &.form {
+
+//    .form-submit-wrap {
+//      border-color: $color-2;
+//
+//      @media (min-width: $bp-small) {
+//        border-color: $color;
+//      }
+//    }
+//
+//    input.form-submit {
+//      color: $color-2;
+//      border-color: $color-2;
+//
+//      @media (min-width: $bp-small) {
+//        color: $color;
+//        border-color: $color;
+//      }
+//
+//
+//      &:hover {
+//        color: $color;
+//        background: $color-2;
+//
+//        @media (min-width: $bp-small) {
+//          color: $color-2;
+//          background: $color;
+//        }
+//      }
+//    }
+  }
+}

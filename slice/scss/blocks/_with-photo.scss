@@ -1,0 +1,365 @@
+.b-with-photo {
+  position: relative;
+  background-size: cover;
+  margin-bottom: 15px;
+
+  @media (min-width: $bp-small) {
+    height: 379px;
+    background: none !important;
+    margin-bottom: 0;
+    z-index: 99;
+  }
+
+  @media (min-width: $bp-middle) {
+    height: 529px;
+  }
+
+  &:before, &:after {
+    @include skewX(41deg);
+    z-index: -1;
+  }
+
+  &:after {
+    @include pseudo-block($right: 402px, $top: 0, $bottom: 0);
+    height: 100%;
+    width: 100%;
+    border-bottom: 1px solid $color-1;
+    display: none;
+    z-index: -1;
+
+    @media (min-width: $bp-small) {
+      display: block;
+    }
+
+    @media (min-width: $bp-middle) {
+      right: 553px;
+    }
+
+    @media (min-width: $width-x-large) {
+      right: calc((100% - (100% - #{$width-x-large})/2) - 741px);
+    }
+  }
+
+  .bg-mobile {
+    display: block;
+    height: 200px;
+    background-position: 50% 20%;
+
+    @media (min-width: $bp-small) {
+      display: none;
+    }
+  }
+
+  h3 {
+
+    br {
+      display: none;
+
+      @media (min-width: $bp-small) {
+        display: block;
+      }
+    }
+  }
+
+  .container {
+    height: 100%;
+
+    @media (min-width: $bp-small) {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+    }
+  }
+
+  .inner-wrap {
+    padding: 20px 0 0;
+
+    @media (min-width: $bp-small) {
+      max-width: 339px;
+      position: absolute;
+      top: 50%;
+      @include translate(0, -50%);
+      z-index: 1;
+      padding: 0;
+    }
+
+    @media (min-width: $bp-large) {
+      max-width: 467px;
+    }
+  }
+
+  &.style-a, &.style-b, &.style-c {
+
+    &:after {
+      border-bottom: none;
+    }
+  }
+
+  &.style-a {
+    margin-bottom: 25px;
+    border: none;
+    color: $color;
+    padding: 0;
+    z-index: auto;
+
+    @media (min-width: $bp-small) {
+      height: auto;
+    }
+
+    @media (min-width: $bp-middle) {
+      margin-bottom: 0;
+    }
+
+    .figure-wrap {
+      position: relative;
+
+      @media (min-width: $bp-small) {
+        height: 529px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+      }
+    }
+
+    .figure {
+      width: 454px;
+
+      @media (min-width: $bp-middle) {
+        width: 748px;
+      }
+    }
+
+    .page-node-type-staff & {
+
+      .figure:not(.style-a) {
+        @media (min-width: $width-x-large) {
+
+          &:after {
+            @include pseudo-block($top: 0, $left: 100%);
+            height: 100%;
+            width: calc((100vw - #{$width-x-large})/2 + 2px);
+            background: $color-bg-1;
+            margin-left: -2px;
+          }
+        }
+      }
+    }
+
+    .container {
+      position: relative;
+    }
+
+    .inner-wrap {
+      max-width: none;
+      width: 100%;
+
+      @media (min-width: $bp-small) {
+        padding-top: 57px;
+        position: relative;
+        top: 0;
+        @include transform(none);
+      }
+
+      br {
+        display: none;
+
+        @media (min-width: $bp-small) {
+          display: inline;
+        }
+      }
+    }
+
+    &:after {
+      right: 300px;
+
+      @media (min-width: $bp-middle) {
+        right: 553px;
+      }
+    }
+  }
+
+  &.style-b {
+
+    @media (min-width: $bp-small) {
+      height: 214px;
+    }
+
+    @media (min-width: $bp-middle) {
+      height: 298px;
+    }
+
+    &:after {
+      right: 553px;
+
+      @media (min-width: $bp-middle) {
+        right: 649px;
+      }
+
+      @media (min-width: $width-x-large) {
+        right: calc((100% - (100% - #{$width-x-large})/2) - 646px);
+      }
+    }
+
+    h3 {
+      margin: 0 0 8px;
+    }
+  }
+
+  &.style-c {
+    margin: 0 0 15px;
+    padding: 20px 0;
+    color: $color-2;
+    background-position: 50% 50%;
+
+    @media (min-width: $bp-small) {
+      height: 450px;
+      margin: 50px 0;
+      color: $color;
+    }
+
+    @media (min-width: $bp-middle) {
+      height: 630px;
+      margin: 0;
+    }
+
+    &:after {
+      right: 395px;
+
+      @media (min-width: $bp-middle) {
+        right: 509px;
+      }
+
+      @media (min-width: $width-x-large) {
+        right: calc((100% - (100% - #{$width-x-large})/2) - 792px);
+      }
+    }
+
+    h3 {
+      margin: 0 0 21px;
+    }
+
+    .inner-wrap {
+      max-width: none;
+
+      @media (min-width: $bp-small) {
+        padding-top: 58px;
+        width: 500px;
+      }
+
+      @media (min-width: $bp-middle) {
+        padding-top: 33px;
+      }
+    }
+  }
+
+  &.style-d {
+    background: none !important;
+    padding: 0;
+    border: none;
+    margin-top: -4px;
+    color: $color;
+
+    @media (min-width: $bp-small) {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+
+    h3 {
+      max-width: 483px;
+
+      @media (min-width: $bp-small) {
+        max-width: none;
+        margin: 0 0 20px;
+      }
+    }
+  }
+
+  &.style-f {
+
+    h3 {
+
+      br {
+        display: block;
+      }
+    }
+  }
+
+  .figure {
+    display: none;
+
+    @media (min-width: $bp-small) {
+      width: 533px;
+      display: block;
+    }
+
+    @media (min-width: $bp-middle) {
+      width: 748px;
+      z-index: -2;
+    }
+
+    @media (min-width: $width-x-large) {
+      width: calc((100% - (100% - #{$width-x-large})/2) - 555px);
+    }
+
+    rect {
+      fill: $color-bg-1;
+    }
+
+    &.style-a {
+      top: -200px;
+      height: calc(100% + 241px);
+      width: 512px;
+
+      @media (min-width: $bp-middle) {
+        width: 844px;
+      }
+    }
+  }
+
+  h3 {
+    line-height: 1.5;
+    letter-spacing: 3.7px;
+    margin: 0 0 16px;
+
+    @media (min-width: $bp-small) {
+      margin: 0 0 20px;
+    }
+
+    @media (min-width: $bp-middle) {
+      padding-right: 90px;
+      margin: 0 0 33px;
+    }
+  }
+
+  p {
+    margin: 0 0 35px;
+  }
+
+  .img-mobile {
+    height: 220px;
+    position: relative;
+    text-align: right;
+    overflow: hidden;
+    margin-bottom: 20px;
+
+    @media (min-width: $bp-small) {
+      display: none;
+    }
+
+    &:after {
+      @include pseudo-block($right: -48px, $bottom: 0);
+      height: 54px;
+      width: 100%;
+      background: $color;
+      @include skewX(-41deg);
+      z-index: -1;
+    }
+
+    img {
+      margin-left: 41px;
+    }
+  }
+}

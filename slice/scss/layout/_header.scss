@@ -1,0 +1,251 @@
+.site-header {
+  height: 76px;
+  line-height: 1.2;
+  position: relative;
+  box-shadow: 0px 0px 32px 0px rgba(0, 0, 0, 0.18);
+  z-index: 1;
+
+  .bg {
+    position: absolute;
+    top: 0;
+    right: -50px;
+    height: 100%;
+    width: calc(100% - (100% - #{$width-large}) / 2 - 272px);
+    z-index: -1;
+    display: none;
+
+    @media (min-width: $bp-small) {
+      display: block;
+    }
+
+    @media (min-width: $bp-middle) {
+      width: calc(100% - (100% - #{$width-large}) / 2 - 189px);
+    }
+
+    span {
+      display: block;
+      height: 100%;
+      background: $color-9;
+      @include transform(skewX(41deg));
+    }
+  }
+
+  .container {
+    height: 100%;
+    width: 100%;
+
+    @media (min-width: $bp-small) {
+      width: $width-small;
+    }
+
+    @media (min-width: $bp-middle) {
+      width: $width-middle;
+    }
+  }
+
+  a.btn-nav {
+    right: 5%;
+    width: 65px;
+    height: 27px;
+    z-index: 9999;
+    text-decoration: none;
+    text-transform: uppercase;
+    position: absolute;
+    top: 50%;
+    @include translate(0, -50%);
+    @include transition(opacity .3s);
+
+    &:hover {
+
+      .desktop & {
+        opacity: .7;
+      }
+    }
+
+    &.mobile-only {
+      display: block;
+
+      @media (min-width: $bp-small) {
+        display: none;
+      }
+    }
+
+    &:before, &:after {
+      @include pseudo-block($left: 0, $top: 0);
+      @include skewX(41deg);
+      background: $color-9;
+      height: 10px;
+      width: 52px;
+    }
+
+    &:after {
+      left: 10px;
+      top: 16px;
+    }
+  }
+
+  .logo {
+    position: absolute;
+    top: 50%;
+    left: 5%;
+    @include translate(0, -50%);
+    @include transition(opacity .3s);
+
+    @media (min-width: $bp-small) {
+      left: 0;
+    }
+
+    &:hover {
+
+      .desktop & {
+        opacity: .7;
+      }
+    }
+  }
+
+  .nav {
+
+    @media (min-width: $bp-small) {
+      right: 0;
+      position: absolute;
+      top: 50%;
+      @include translate(0, -50%)
+    }
+
+    &.nav-active .menu {
+      opacity: 1;
+      visibility: visible;
+
+      & > li {
+
+        @media (max-width: $bp-small-mobile) {
+          visibility: visible !important;
+        }
+      }
+    }
+
+    ul.menu {
+      margin: 0;
+      padding: 10px 0;
+      position: absolute;
+      top: 100%;
+      z-index: 100;
+      width: 100%;
+      background: $color-9;
+      opacity: 0;
+      visibility: hidden;
+      @include transition(opacity .5s);
+
+      @media (min-width: $bp-small) {
+        position: relative;
+        top: auto;
+        padding: 0;
+        width: auto;
+        @include transition(all 0s);
+        background: none;
+        opacity: 1;
+        visibility: visible;
+      }
+
+      & > li {
+
+        @media (max-width: $bp-small-mobile) {
+          visibility: hidden !important;
+        }
+      }
+
+      li {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        text-align: center;
+
+        @media (min-width: $bp-small) {
+          display: inline-block;
+          vertical-align: middle;
+          text-align: left;
+          margin: 0 7px;
+        }
+
+        @media (min-width: $bp-middle) {
+          margin: 0 29px;
+        }
+
+        &:last-child {
+          margin-right: 0;
+        }
+
+        &.active {
+
+          & > a {
+            background: $color-2;
+            color: $color-9;
+
+            @media (min-width: $bp-small) {
+              background: transparent;
+              color: $color-2;
+            }
+
+            &:after {
+
+              @media (min-width: $bp-small) {
+                @include translate(0, 0);
+                opacity: 1;
+              }
+            }
+          }
+        }
+      }
+
+      a {
+        font-family: $aviano-sans-black;
+        font-size: 16px;
+        color: $color-2;
+        text-decoration: none;
+        @include transition(color .3s, background .3s);
+        letter-spacing: 0.08em;
+        display: block;
+        padding: 10px;
+        position: relative;
+
+        @media (min-width: $bp-small) {
+          font-size: 10px;
+          display: inline-block;
+          vertical-align: middle;
+          padding: 7px 0;
+
+        }
+
+        &:after {
+
+          @media (min-width: $bp-small) {
+            @include pseudo-block($bottom: 0, $left: 0);
+            width: 100%;
+            @include transition(transform .4s, opacity .4s);
+            border-bottom: 1px solid $color-2;
+            @include translate(-10px, 0);
+            opacity: 0;
+          }
+        }
+
+        &:hover {
+          background: $color-2;
+          color: $color-9;
+
+          @media (min-width: $bp-small) {
+            background: transparent;
+            color: $color-2;
+          }
+
+          &:after {
+
+            @media (min-width: $bp-small) {
+              @include translate(0, 0);
+              opacity: 1;
+            }
+          }
+        }
+      }
+    }
+  }
+}

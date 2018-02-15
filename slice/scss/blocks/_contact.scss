@@ -1,0 +1,43 @@
+.b-contact {
+
+  .left-part, .right-part {
+    line-height: 1.4;
+    margin-bottom: 20px;
+
+    @media (min-width: $bp-small) {
+      width: 49%;
+      display: inline-block;
+      vertical-align: bottom;
+      margin-bottom: 71px;
+    }
+
+    p {
+      margin: 0 0 5px;
+
+      @media (min-width: $bp-small) {
+        margin: 0 0 10px;
+      }
+    }
+  }
+
+  .left-part {
+    font-size: 24px;
+    text-transform: uppercase;
+    font-family: $AvianoSansBold;
+
+    @media (min-width: $bp-small) {
+      margin-right: 10px;
+    }
+  }
+
+  .right-part {
+
+    @media (min-width: $bp-small) {
+      text-align: right;
+    }
+
+    a {
+      color: $color;
+    }
+  }
+}

@@ -1,0 +1,15 @@
+diff --git a/src/Plugin/Block/MenuBlock.php b/src/Plugin/Block/MenuBlock.php
+index fab522a..d44de0d 100644
+--- a/src/Plugin/Block/MenuBlock.php
++++ b/src/Plugin/Block/MenuBlock.php
+@@ -172,6 +172,10 @@ class MenuBlock extends SystemMenuBlock {
+       $build['#theme'] = 'menu';
+     }
+ 
++    $build['#contextual_links']['menu'] = array(
++      'route_parameters' => array('menu' => $menu_name),
++    );
++
+     return $build;
+   }
+ 

@@ -1,0 +1,58 @@
+.section-career {
+  text-align: center;
+  color: $color-2;
+  padding: 30px 0;
+
+  @media (min-width: $bp-small) {
+    padding: 0;
+    height: 649px;
+    text-align: left;
+  }
+
+  .bg {
+    background-position: 50% 35%;
+    display: none;
+
+    @media (min-width: $bp-small) {
+      display: block;
+    }
+  }
+
+  .inner-wrap {
+
+    @media (min-width: $bp-small) {
+      text-align: right;
+      right: 0;
+      width: 382px;
+    }
+
+    @media (min-width: $bp-middle) {
+      width: 460px;
+    }
+  }
+
+  h2 {
+    color: $color-2;
+    margin: 0 0 20px;
+
+    @media (min-width: $bp-small) {
+      margin: 0 0 36px;
+    }
+  }
+
+  .text {
+    margin: 0 0 20px;
+
+    @media (min-width: $bp-small) {
+      margin: 0 0 43px;
+    }
+
+    br {
+      display: none;
+
+      @media (min-width: $bp-middle) {
+        display: block;
+      }
+    }
+  }
+}

@@ -1,0 +1,38 @@
+{#
+/**
+* @file
+* Theme top section.
+*/
+#}
+<section class="section section-top">
+  {{ vars.top_image_mobile }}
+  <div class="left-bg">
+    <div class="figure">
+      <svg width="100%" height="100%">
+        <g clip-path="url(#section-top-left-bg)">
+          {{ vars.top_image }}
+        </g>
+      </svg>
+    </div>
+  </div>
+  <div class="right-bg">
+    <div class="figure">
+      <svg width="100%" height="100%">
+        <g clip-path="url(#section-top-right-bg)">
+          {{ vars.top_image_right }}
+        </g>
+      </svg>
+    </div>
+  </div>
+  <div class="container">
+    <div class="inner-wrap">
+      <div class="content-wrap">
+        <h1>{{ vars.title|raw }}</h1>
+        <div class="text">
+          {{ vars.body }}
+        </div>
+        {{ vars.top_button }}
+      </div>
+    </div>
+  </div>
+</section>

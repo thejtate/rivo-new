@@ -1,0 +1,93 @@
+<!--Drupal Base theme styles-->
+<style media="all">
+    @import url("common/css/drupal/normalize.css");
+    @import url("common/css/drupal/stable/css/block/block.admin.css");
+    @import url("common/css/drupal/stable/css/ckeditor/ckeditor.admin.css");
+    @import url("common/css/drupal/stable/css/ckeditor/ckeditor.css");
+    /*@import url("common/css/drupal/stable/css/ckeditor/ckeditor-iframe.css");*/
+    @import url("common/css/drupal/stable/css/color/color.admin.css");
+    @import url("common/css/drupal/stable/css/config_translation/config_translation.admin.css");
+    @import url("common/css/drupal/stable/css/content_translation/content_translation.admin.css");
+    @import url("common/css/drupal/stable/css/contextual/contextual.icons.theme.css");
+    @import url("common/css/drupal/stable/css/contextual/contextual.module.css");
+    @import url("common/css/drupal/stable/css/contextual/contextual.theme.css");
+    @import url("common/css/drupal/stable/css/contextual/contextual.toolbar.css");
+    /*@import url("common/css/drupal/stable/css/core/print.css");*/
+    @import url("common/css/drupal/stable/css/core/vertical-tabs.css");
+    @import url("common/css/drupal/stable/css/dblog/dblog.module.css");
+    @import url("common/css/drupal/stable/css/field_ui/field_ui.admin.css");
+    @import url("common/css/drupal/stable/css/file/file.admin.css");
+    @import url("common/css/drupal/stable/css/filter/filter.admin.css");
+    @import url("common/css/drupal/stable/css/filter/filter.caption.css");
+    @import url("common/css/drupal/stable/css/image/image.admin.css");
+    @import url("common/css/drupal/stable/css/language/language.admin.css");
+    @import url("common/css/drupal/stable/css/locale/locale.admin.css");
+    @import url("common/css/drupal/stable/css/menu_ui/menu_ui.admin.css");
+    @import url("common/css/drupal/stable/css/node/node.admin.css");
+    @import url("common/css/drupal/stable/css/node/node.module.css");
+    @import url("common/css/drupal/stable/css/node/node.preview.css");
+    @import url("common/css/drupal/stable/css/quickedit/quickedit.icons.theme.css");
+    @import url("common/css/drupal/stable/css/quickedit/quickedit.module.css");
+    @import url("common/css/drupal/stable/css/quickedit/quickedit.theme.css");
+    @import url("common/css/drupal/stable/css/shortcut/shortcut.icons.theme.css");
+    @import url("common/css/drupal/stable/css/shortcut/shortcut.theme.css");
+    @import url("common/css/drupal/stable/css/simpletest/simpletest.module.css");
+    @import url("common/css/drupal/stable/css/system/system.admin.css");
+    @import url("common/css/drupal/stable/css/system/system.diff.css");
+    @import url("common/css/drupal/stable/css/system/system.maintenance.css");
+    @import url("common/css/drupal/stable/css/taxonomy/taxonomy.theme.css");
+    @import url("common/css/drupal/stable/css/toolbar/toolbar.icons.theme.css");
+    @import url("common/css/drupal/stable/css/toolbar/toolbar.menu.css");
+    @import url("common/css/drupal/stable/css/toolbar/toolbar.module.css");
+    @import url("common/css/drupal/stable/css/toolbar/toolbar.theme.css");
+    @import url("common/css/drupal/stable/css/tour/tour.module.css");
+    @import url("common/css/drupal/stable/css/update/update.admin.theme.css");
+    @import url("common/css/drupal/stable/css/user/user.admin.css");
+    @import url("common/css/drupal/stable/css/user/user.icons.admin.css");
+    @import url("common/css/drupal/stable/css/user/user.module.css");
+    @import url("common/css/drupal/stable/css/views/views.module.css");
+    @import url("common/css/drupal/stable/css/views_ui/views_ui.admin.css");
+    @import url("common/css/drupal/stable/css/views_ui/views_ui.admin.theme.css");
+    @import url("common/css/drupal/stable/css/views_ui/views_ui.contextual.css");
+</style>
+<!--Drupal Extended theme styles-->
+<style media="all">
+    @import url("common/css/drupal/classy/css/components/action-links.css");
+    @import url("common/css/drupal/classy/css/components/book-navigation.css");
+    @import url("common/css/drupal/classy/css/components/breadcrumb.css");
+    @import url("common/css/drupal/classy/css/components/button.css");
+    @import url("common/css/drupal/classy/css/components/collapse-processed.css");
+    @import url("common/css/drupal/classy/css/components/container-inline.css");
+    @import url("common/css/drupal/classy/css/components/details.css");
+    @import url("common/css/drupal/classy/css/components/dialog.css");
+    @import url("common/css/drupal/classy/css/components/dropbutton.css");
+    @import url("common/css/drupal/classy/css/components/exposed-filters.css");
+    @import url("common/css/drupal/classy/css/components/field.css");
+    @import url("common/css/drupal/classy/css/components/file.css");
+    @import url("common/css/drupal/classy/css/components/form.css");
+    @import url("common/css/drupal/classy/css/components/forum.css");
+    @import url("common/css/drupal/classy/css/components/icons.css");
+    @import url("common/css/drupal/classy/css/components/image-widget.css");
+    @import url("common/css/drupal/classy/css/components/indented.css");
+    @import url("common/css/drupal/classy/css/components/inline-form.css");
+    @import url("common/css/drupal/classy/css/components/item-list.css");
+    @import url("common/css/drupal/classy/css/components/link.css");
+    @import url("common/css/drupal/classy/css/components/links.css");
+    @import url("common/css/drupal/classy/css/components/menu.css");
+    @import url("common/css/drupal/classy/css/components/messages.css");
+    @import url("common/css/drupal/classy/css/components/more-link.css");
+    @import url("common/css/drupal/classy/css/components/node.css");
+    @import url("common/css/drupal/classy/css/components/pager.css");
+    @import url("common/css/drupal/classy/css/components/progress.css");
+    @import url("common/css/drupal/classy/css/components/search-results.css");
+    @import url("common/css/drupal/classy/css/components/tabledrag.css");
+    @import url("common/css/drupal/classy/css/components/tableselect.css");
+    @import url("common/css/drupal/classy/css/components/tablesort.css");
+    @import url("common/css/drupal/classy/css/components/tabs.css");
+    @import url("common/css/drupal/classy/css/components/textarea.css");
+    @import url("common/css/drupal/classy/css/components/ui-dialog.css");
+    @import url("common/css/drupal/classy/css/components/user.css");
+</style>
+<!--Drupal END-->
+<link href="theme/css/styles.css" rel="stylesheet" type="text/css">
+<link href="theme/css/custom.css" rel="stylesheet" type="text/css">

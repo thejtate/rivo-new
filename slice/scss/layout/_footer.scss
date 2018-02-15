@@ -1,0 +1,138 @@
+.site-footer {
+  color: $color-2;
+  font-family: $AvianoSansBold;
+  background: $color-9;
+  line-height: 1.5;
+  letter-spacing: 1.8px;
+  padding: 40px 0;
+  text-align: center;
+  height: 317px;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+
+  @media (min-width: $bp-small) {
+    height: 300px;
+    padding: 0;
+  }
+
+  @media (min-width: $bp-middle) {
+    height: 353px;
+  }
+
+  .container {
+    height: 100%;
+  }
+
+  .inner-wrap {
+    text-align: center;
+
+    @media (min-width: $bp-small) {
+      position: absolute;
+      top: 50%;
+      @include translate(0, -50%);
+      width: 100%;
+    }
+  }
+
+  .contact, .logo {
+
+    @media (min-width: $bp-small) {
+      display: inline-block;
+      vertical-align: middle;
+    }
+  }
+
+  .contact {
+    font-size: 14px;
+    line-height: 1.8;
+    margin-bottom: 31px;
+
+    @media (min-width: $bp-small) {
+      text-align: right;
+      position: relative;
+      font-size: 18px;
+      line-height: 1.5;
+      padding-top: 14px;
+      margin-bottom: 0;
+    }
+
+    &:after {
+      @include pseudo-block($right: -79px, $top: 50%);
+      @include transform(translate(0, -50%) skewX(41deg));
+      width: 95px;
+      height: 105px;
+      border-right: 1px solid $color-5;
+      display: none;
+      z-index: -1;
+
+      @media (min-width: $bp-small) {
+        right: -79px;
+        width: 95px;
+        height: 105px;
+        display: block;
+      }
+
+    }
+
+    p {
+      margin: 0;
+    }
+  }
+
+  .logo {
+    @include transition(opacity .3s);
+    @include backface-visibility(hidden);
+    width: 70%;
+    margin: 0 auto;
+
+    @media (min-width: $bp-small) {
+      margin: 0 0 0 149px;
+      width: auto;
+    }
+
+    &:hover {
+      opacity: .7;
+    }
+  }
+
+  .clip-path {
+    position: absolute;
+    display: block;
+    left: -9999px;
+  }
+
+  a[href^="tel"] {
+    color: $color-2;
+  }
+
+  .social {
+    margin-top: 15px;
+
+    .field__item {
+      display: inline-block;
+      vertical-align: middle;
+      padding: 0;
+      margin: 0 3px 0 0;
+
+      &:last-child {
+        margin: 0;
+      }
+
+      .ico {
+        color: $color-2;
+        @include transition(color .3s);
+        font-size: 23px;
+        display: block;
+      }
+
+      &:hover {
+
+        .ico {
+          color: $color-1;
+        }
+      }
+    }
+  }
+}

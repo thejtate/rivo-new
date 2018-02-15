@@ -1,0 +1,108 @@
+.b-slider {
+
+  .slick-arrow {
+    @include text-hide();
+  }
+
+  .slick-arrow {
+    text-decoration: none;
+    display: block;
+    top: 50%;
+    left : 0;
+    position: absolute;
+    @include translate(0, -50%);
+    height: 25px;
+    width: 25px;
+    z-index: 1;
+    @include transition(opacity .3s);
+
+    &:hover {
+      opacity: .5;
+      backface-visibility: hidden;
+    }
+
+    &:before {
+      @include pseudo-block($top: 50%, $left: 50%);
+      @include transform(translate(-50%, -50%) rotate(45deg));
+      height: 13px;
+      width: 13px;
+      border: 4px solid $color;
+      border-top: none;
+      border-right: none;
+      z-index: -1;
+    }
+
+    &.slick-next {
+      left: auto;
+      right: 0;
+
+      &:before {
+        border: 5px solid $color;
+        border-bottom: none;
+        border-left: none;
+      }
+    }
+  }
+
+  .slick-dots {
+    text-align: center;
+    position: relative;
+    display: block;
+    width: 100%;
+    padding: 0 46px;
+    margin: 0 0 3px;
+    list-style: none;
+
+    li {
+      margin: 0 9px 0;
+      display: inline-block;
+      padding: 0;
+      position: relative;
+      cursor: pointer;
+      vertical-align: middle;
+
+      &:hover {
+
+        button {
+          @include scale(1.2);
+
+          &:hover, &:focus {
+            outline: none;
+          }
+        }
+      }
+
+      &.slick-active {
+
+        button:after {
+          height: 100%;
+        }
+      }
+    }
+
+    button {
+      @include text-hide();
+      width: 13px;
+      height: 13px;
+      background-color: transparent;
+      transition: transform .3s, background .3s, border .3s;
+      border-radius: 50%;
+      border: 2px solid $color;
+      display: block;
+      padding: 0;
+      cursor: pointer;
+      color: transparent;
+      outline: none;
+      position: relative;
+      overflow: hidden;
+
+      &:after {
+        @include pseudo-block($bottom: 0, $left: 0);
+        height: 0;
+        width: 100%;
+        background-color: $color;
+        transition: height 0.3s;
+      }
+    }
+  }
+}

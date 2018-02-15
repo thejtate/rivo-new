@@ -1,0 +1,4 @@
+rivo custom access to toolbar tools icon:
+  description: 'Show drupal tools icon in admin toolbar.'
+  title: 'Show drupal tools icon in admin toolbar.'
+  restrict access: TRUE

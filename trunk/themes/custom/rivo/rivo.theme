@@ -1,0 +1,428 @@
+<?php
+
+/**
+ * @file
+ * Functions to support theming in the rivo theme.
+ */
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Template\Attribute;
+use Drupal\Component\Utility\Xss;
+
+define('RIVO_WHAT_WE_DO_NID', 30);
+
+/**
+ * Implements hook_preprocess_HOOK() for html.html.twig.
+ */
+function rivo_preprocess_html(array &$vars) {
+  if ($node = \Drupal::request()->attributes->get('node')) {
+    $vars['attributes']['class'][] = 'page-' . strtolower($node->getTitle());
+  }
+  /* Add class to html tag */
+  //$vars['html_attributes']->addClass('no-js');
+
+  // Don't display the site name twice on the front page (and potentially others)
+  /*if (isset($vars['head_title_array']['title']) && isset($vars['head_title_array']['name']) && ($vars['head_title_array']['title'] == $vars['head_title_array']['name'])) {
+    $vars['head_title'] = $vars['head_title_array']['name'];
+  }*/
+}
+
+/**
+ * Implements hook_page_attachments_alter().
+ */
+function rivo_page_attachments_alter(array &$page) {
+  // Tell IE to use latest rendering engine (not to use compatibility mode).
+  /*$ie_edge = [
+    '#type' => 'html_tag',
+    '#tag' => 'meta',
+    '#attributes' => [
+    'http-equiv' => 'X-UA-Compatible',
+    'content' => 'IE=edge',
+    ],
+  ];
+  $page['#attached']['html_head'][] = [$ie_edge, 'ie_edge'];*/
+}
+
+/**
+ * Implements hook_preprocess().
+ */
+function rivo_preprocess(&$vars, $hook) {
+  if (!empty($vars['directory'])) {
+    $vars['theme_path'] = base_path() . $vars['directory'];
+  }
+}
+
+/**
+ * Implements hook_preprocess_page() for page.html.twig.
+ */
+function rivo_preprocess_page(array &$vars) {
+  /**
+   * @var \Drupal\node\Entity\Node
+   */
+  $node = Drupal::request()->attributes->get('node');
+  $top_block = array();
+
+  if(!empty($node)) {
+    if ($node->hasField('field_common_top_image')) {
+      $top_block['top_image'] = $node->field_common_top_image->view('full');
+    }
+    if ($node->hasField('field_common_top_img_right')) {
+      $top_block['top_image_right'] = $node->field_common_top_img_right->view('full');
+    }
+    if ($node->hasField('field_common_top_image_mobile')) {
+      $top_block['top_image_mobile'] = $node->field_common_top_image_mobile->view('full');
+    }
+    if ($node->hasField('body')) {
+      $top_block['body'] = $node->body->view('full');
+    }
+    if ($node->hasField('field_common_top_button')) {
+      $top_block['top_button'] = $node->field_common_top_button->view('full');
+    }
+    if (!empty($top_block['top_image'])) {
+      $top_block['title'] = $node->getTitle();
+      $vars['top_section'] = array(
+        '#theme' => 'rivo_top_section',
+        '#vars' => $top_block,
+      );
+    }
+
+    switch($node->bundle()) {
+      case 'staff_landing':
+        $vars['attributes']['class'][] = 'content-wrapper';
+        $vars['attributes']['class'][] = 'container';
+        break;
+    }
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function rivo_theme() {
+  return [
+    'rivo_top_section' => [
+      'template' => 'rivo_top_section',
+      'variables' => ['vars' => NULL,],
+    ],
+  ];
+}
+
+/**
+ * Implements hook_theme_suggestions_page_alter().
+ */
+function rivo_theme_suggestions_page_alter(array &$suggestions, array $vars) {
+
+}
+
+/**
+ * Implements hook_theme_suggestions_node_alter().
+ */
+function rivo_theme_suggestions_node_alter(array &$suggestions, array $vars) {
+  $node = $vars['elements']['#node'];
+
+  $node_type = strtolower($node->type->entity->label());
+  switch ($node_type) {
+    case 'staff':
+      $title = $node->field_position->value;
+      if (!empty($title)) {
+        $suggestions[] = 'node__' . $node_type . '__' . $vars['elements']['#view_mode'] . '__' . strtolower($title);
+      }
+      break;
+  }
+  /*$node = $vars['elements']['#node'];
+
+  if ($vars['elements']['#view_mode'] == "full") {
+
+  }*/
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for Block document templates.
+ */
+function rivo_preprocess_block(array &$vars) {
+  //ksm($vars);
+}
+
+/**
+ * Implements hook_theme_suggestions_block_alter().
+ */
+function rivo_theme_suggestions_block_alter(array &$suggestions, array $vars) {
+
+  if(!empty($vars['elements']['content']['#block_content'])) {
+    $suggestions[] = 'block__' . $vars['elements']['content']['#block_content']->bundle();
+  }
+}
+
+/**
+ * Implements hook_preprocess_node().
+ */
+function rivo_preprocess_node(array &$vars) {
+  $node = $vars['node'];
+  switch($node->bundle()) {
+    case 'staff_landing':
+//      ksm($node);
+      $block = \Drupal\block\Entity\Block::load('views_block__staff_block_1');
+      if (!empty($block)) {
+        $vars['staff_block'] = \Drupal::entityTypeManager()
+          ->getViewBuilder('block')
+          ->view($block);
+      }
+      break;
+    case 'homepage':
+      $vars['title'] = $node->getTitle();
+      if ($node->hasField('field_home_wwa_title')) {
+        $who_we_are_title = $node->field_home_wwa_title->getString();
+        $vars['who_we_are_title'] = '<h2>' . $who_we_are_title . '</h2>';
+      }
+      if ($node->hasField('field_home_career_title')) {
+        $career_title = $node->field_home_career_title->getString();
+        $vars['career_title'] = '<h2>' . $career_title . '</h2>';
+      }
+      break;
+    case 'who_we_are':
+      if ($node->id() == RIVO_WHAT_WE_DO_NID) {
+        $vars['block1_classes'] = array('style-f');
+      }
+      break;
+  }
+
+}
+
+/**
+ * Implements hook_preprocess_paragraph().
+ */
+function rivo_preprocess_paragraph(array &$vars) {
+
+  $paragraph = $vars['paragraph'];
+  $parent_field_name = $paragraph->parent_field_name->getString();;
+  $parent_field_delta = $paragraph->_referringItem->getName();
+  $bundle = $paragraph->bundle();
+
+  switch($parent_field_name) {
+  }
+
+  switch($bundle) {
+
+  }
+}
+
+/**
+ * Implements hook_theme_suggestions_views_view_alter().
+ */
+function rivo_theme_suggestions_views_view_alter(array &$suggestions, array $vars) {
+
+}
+
+/**
+ * Implements hook_preprocess_form().
+ */
+function rivo_preprocess_form(array &$vars) {
+  //$vars['attributes']['novalidate'] = 'novalidate';
+}
+
+/**
+ * Implements hook_form_alter().
+ *
+ * @param $form
+ * @param \Drupal\Core\Form\FormStateInterface $form_state
+ * @param $form_id
+ */
+function rivo_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+//  dsm($form_id);
+  switch ($form_id){
+    case 'webform_submission_contact_form':
+    case 'webform_submission_contact_node_10_form':
+      $form['actions']['submit']['#attributes']['class'][] = 'form-submit';
+      $form['actions']['submit']['#prefix'] = '<div class="form-submit-wrap">';
+      $form['actions']['submit']['#suffix'] = '</div>';
+      break;
+  }
+}
+
+/**
+ * Implements hook_preprocess_field().
+ */
+function rivo_preprocess_field(array &$vars, $hook) {
+
+  $disable_quick_edit_field_types = ['image', 'google_map_field', 'link', 'field_collection'];
+// ksm($vars['field_type']);
+
+  if(in_array($vars['field_type'], $disable_quick_edit_field_types)) {
+
+    if(isset($vars['attributes']['data-quickedit-field-id'])) {
+      unset($vars['attributes']['data-quickedit-field-id']);
+    }
+  }
+  if($vars['field_type'] == 'image') {
+    if(!empty($vars['items'][0]['content']['#item']->entity)) {
+      $vars['image_url'] = $vars['items'][0]['content']['#item']->entity->url();
+    }
+  }
+
+  switch ($vars['element']['#field_name']) {
+    case 'field_homepage_link1':
+      if(!empty($vars['items'][0]['content'])) {
+        $vars['items'][0]['content']['#options']['attributes']['class'][] = 'btn';
+      }
+      break;
+    case 'field_homepage_link2':
+      if(!empty($vars['items'][0]['content'])) {
+        $vars['items'][0]['content']['#options']['attributes']['class'][] = 'btn';
+        $vars['items'][0]['content']['#options']['attributes']['class'][] = 'white';
+      }
+      break;
+    case 'field_home_reviews_link':
+      if(!empty($vars['items'][0]['content'])) {
+        $vars['items'][0]['content']['#options']['attributes']['class'][] = 'btn';
+        $vars['items'][0]['content']['#options']['attributes']['class'][] = 'brown';
+      }
+      break;
+    case 'field_home_career_link':
+    case 'field_common_top_button':
+      if(!empty($vars['items'][0]['content'])) {
+        $vars['items'][0]['content']['#options']['attributes']['class'][] = 'btn';
+        $vars['items'][0]['content']['#options']['attributes']['class'][] = 'white-blue';
+      }
+      break;
+    case 'field_facebook':
+    case 'field_twitter':
+    case 'field_linkedin':
+      if(!empty($vars['items'][0]['content'])) {
+        $vars['items'][0]['content']['#options']['attributes']['class'][] = 'ico';
+        $vars['items'][0]['content']['#options']['attributes']['class'][] = 'ss-icon';
+        $vars['items'][0]['content']['#options']['attributes']['class'][] = 'ss-social-regular';
+        $vars['items'][0]['content']['#title'] = '';
+
+        if ($vars['element']['#field_name'] == 'field_facebook') {
+          $vars['items'][0]['content']['#options']['attributes']['class'][] = ' ss-facebook';
+        } else if ($vars['element']['#field_name'] == 'field_twitter') {
+          $vars['items'][0]['content']['#options']['attributes']['class'][] = ' ss-twitter';
+        } else {
+          $vars['items'][0]['content']['#options']['attributes']['class'][] = ' ss-linkedin';
+        }
+      }
+      break;
+    case 'field_block_back_link':
+    case 'field_staff_button':
+      if(!empty($vars['items']['0']['content'])) {
+        $vars['items']['0']['content']['#options']['attributes']['class'][] = 'btn';
+        $vars['items']['0']['content']['#options']['attributes']['class'][] = 'gray-blue';
+      }
+      //ksm($vars);
+      break;
+    case 'field_contacts_phone':
+      if(!empty($vars['items']['0']['content']['#context']['value'])) {
+        $vars['phone_digits'] = preg_replace("/[^0-9]/", "", $vars['items']['0']['content']['#context']['value']);
+      }
+      break;
+    case 'field_staff_land_block1_text':
+    case 'field_careers_block2_text':
+    case 'field_wwa_block2_text':
+      $vars['attributes']['class'][] = 'text';
+      break;
+    case 'field_careers_block2_button':
+      if(!empty($vars['items'][0]['content'])) {
+        $vars['items'][0]['content']['#options']['attributes']['class'][] = 'btn';
+      }
+      break;
+    case 'field_wwa_block1_title':
+      $items = !empty($vars['items']) ? $vars['items'] : array();
+      foreach ($items as $key => $item) {
+        if (!empty($item['content']['#context']['value'])) {
+          $vars['items'][$key]['markup'] = Xss::filter(html_entity_decode($item['content']['#context']['value']), array('br'));
+        }
+      }
+      break;
+    case 'field_wwa_block3_list':
+      $items = !empty($vars['items']) ? $vars['items'] : array();
+      foreach ($items as $key => $item) {
+        $value = Xss::filter(html_entity_decode($item['content']['#context']['value']));
+        $has_T = strpos($value, 'T');
+        $length = strlen ($value);
+        $length--;
+
+        if (($has_T !== FALSE) && ($has_T != $length)) {
+          $start = substr($value, 0, $has_T);
+          $middle = substr($value, $has_T, 2);
+          $finish = substr($value, $has_T + 2, $length);
+          $vars['items'][$key]['content']['#template'] = '{{ value|raw }}';
+          $vars['items'][$key]['content']['#context']['value'] = $start .
+            '<span class="font-style">' . $middle . '</span>' . $finish;
+        }
+      }
+      break;
+  }
+}
+
+/**
+ * Implements hook_theme_suggestions_field_alter().
+ */
+function rivo_theme_suggestions_field_alter(array &$suggestions, array $vars) {
+  switch ($vars['element']['#field_name']) {
+    case 'field_home_wwd_bg_img_mobile':
+    case 'field_home_wwa_bg_img_mobile':
+    case 'field_home_career_bg_img_mobile':
+    case 'field_common_top_image_mobile':
+    case 'field_wwa_content_image_mobile':
+    case 'field_careers_content_img_mobile':
+      $suggestions[] = 'field__field_common_bg_img_mobile';
+      break;
+    case 'field_home_wwa_bg_img':
+    case 'field_reviews_bg_img':
+    case 'field_home_career_bg_img':
+      $suggestions[] = 'field__field_common_bg_img';
+      break;
+    case 'field_home_wwa_desc':
+    case 'field_home_career_desc':
+      $suggestions[] = 'field__field_common_desc';
+      break;
+    case 'field_endors_block2_test':
+    case 'field_endors_block3_test':
+      $suggestions[] = 'field__field_endors_block1_test';
+      break;
+    case 'field_endors_block2_title':
+    case 'field_endors_block3_title':
+      $suggestions[] = 'field__field_endors_block1_title';
+      break;
+  }
+}
+
+/**
+ * Implements hook_preprocess_menu_local_task().
+ */
+function rivo_preprocess_menu_local_task(array &$vars) {
+  //$vars['element']['#link']['url']->setOption('attributes', ['class'=>'rounded']);
+}
+
+/**
+ * Implements hook_contextual_links_alter().
+ */
+function rivo_contextual_links_alter(array &$links, $group, array $route_parameters) {
+//  ksm([$links, $group, $route_parameters]);
+}
+
+/**
+ * Helper function for wrapping render elements.
+ *
+ * @param $element
+ * @param $classes
+ * @param string $tag
+ */
+function rivo_wrap_item(&$element, $classes, $tag = 'div') {
+  if (!empty($element)) {
+    $element['#prefix'] = '<' . $tag . (!empty($classes) ? ' class="' . $classes . '">' : '>') . (array_key_exists('#prefix', $element) ? $element['#prefix'] : '');
+    $element['#suffix'] = (array_key_exists('#suffix', $element) ? $element['#suffix'] : '') . '</'. $tag . '>';
+  }
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK().
+ */
+function rivo_theme_suggestions_field_collection_item_alter(array &$suggestions, array $vars) {
+  $fc_item = $vars['item']['#field_collection_item'];
+  switch ($fc_item->bundle()) {
+    case 'field_endors_block2_test':
+    case 'field_endors_block3_test':
+      $suggestions[] = 'field_collection_item__field_endors_block1_test';
+      break;
+  }
+}

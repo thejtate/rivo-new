@@ -1,0 +1,19 @@
+global-styling:
+  version: VERSION
+  css:
+    theme:
+      css/styles.css: {}
+      css/custom.css: {}
+  js:
+      js/lib/device.min.js: {}
+      js/lib/jquery.browser.js: {}
+      js/lib/scrollreveal.min.js: {}
+      js/lib/slick.min.js: {}
+      js/js.js: {}
+
+  dependencies:
+      - core/jquery
+      - core/drupal.ajax
+      - core/drupal
+      - core/drupalSettings
+      - core/jquery.once

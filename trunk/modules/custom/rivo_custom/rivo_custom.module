@@ -1,0 +1,33 @@
+<?php
+
+/**
+ * @file
+ * Contains rivo_custom.module.
+ */
+use Drupal\Core\Access\AccessResultForbidden;
+
+/**
+ * Implements hook_preprocess_menu__toolbar__admin().
+ */
+function rivo_custom_preprocess_menu__toolbar__admin(&$vars) {
+  $user = \Drupal::currentUser();
+  if (
+    !empty($vars['items']['admin_toolbar_tools.help'])
+    && !$user->hasPermission('rivo custom access to toolbar tools icon')
+  ) {
+    unset($vars['items']['admin_toolbar_tools.help']);
+  }
+}
+
+/**
+ * Implements hook_menu_local_tasks_alter().
+ */
+function rivo_custom_menu_local_tasks_alter(&$data, $route_name) {
+  if ($route_name == 'user.login') {
+    foreach ($data['tabs'][0] as $href => $tab_data) {
+      if (($href == 'user.pass') || ($href == 'user.register')) {
+        $data['tabs'][0][$href]['#access'] = new AccessResultForbidden();
+      }
+    }
+  }
+}
